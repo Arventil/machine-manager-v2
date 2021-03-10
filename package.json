@@ -1,0 +1,24 @@
+{
+  "name": "machine-manager_v2.0",
+  "version": "1.0.0",
+  "description": "Application for managing machines",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Paweł Merek",
+  "license": "MIT",
+  "dependencies": {
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1"
+  }
+}
