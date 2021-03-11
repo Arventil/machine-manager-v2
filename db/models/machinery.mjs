@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
-const Machine = (sequelize) => {
-    const machine = sequelize.define('machine', {
+const Machinery = (sequelize) => {
+    const machinery = sequelize.define('machinery', {
         id: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -16,9 +16,12 @@ const Machine = (sequelize) => {
             type: Sequelize.TEXT,
             allowNull: true
         }
+    },
+    {
+        underscored: true
     });
 
-    return machine;
+    return machinery;
 };
 
-export default Machine;
+export default Machinery;

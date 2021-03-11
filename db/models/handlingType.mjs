@@ -12,6 +12,9 @@ const HandlingType = (sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         }
+    },
+    {
+        underscored: true
     });
 
     return handlingType;

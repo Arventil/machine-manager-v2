@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
-const User = (sequelize) => {
-    const user = sequelize.define('user', {
+const Operator = (sequelize) => {
+    const operator = sequelize.define('operator', {
         id: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -20,9 +20,12 @@ const User = (sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         }
+    },
+    {
+        underscored: true
     });
 
-    return user;
+    return operator;
 };
 
-export default User;
+export default Operator;
