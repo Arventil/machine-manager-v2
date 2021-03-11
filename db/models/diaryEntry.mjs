@@ -16,6 +16,9 @@ const DiaryEntry = (sequelize) => {
             type: Sequelize.TEXT,
             allowNull: false
         }
+    },
+    {
+        underscored: true
     });
 
     return diaryEntry;

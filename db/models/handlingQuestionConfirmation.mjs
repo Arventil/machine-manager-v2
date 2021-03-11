@@ -6,12 +6,15 @@ const HandlingQuestionConfirmation = (sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false,
             autoIncrement: true,
-            priamaryKey: true
+            primaryKey: true
         },
         handlingQuestionResult: {
             type: Sequelize.BOOLEAN,
             allowNull: false
         }
+    },
+    {
+        underscored: true
     });
 
     return handlingQuestionConfirmation;

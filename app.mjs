@@ -1,9 +1,14 @@
 import express from 'express';
 
+import db from './db/dbSettings.mjs';
+
 const app = express();
 
 app.use('/', (req, res, next) => {
-    res.status(200).json({message: 'Hello World!'});
-})
+    res.status(200).json({ message: 'Hello World!' });
+});
 
-app.listen(3000);
+db.sequelize.sync({})
+    .then(() => {
+        app.listen(3000);
+    });

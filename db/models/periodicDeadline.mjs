@@ -1,15 +1,15 @@
 import Sequelize from 'sequelize';
 
-const HandlingQuestion = (sequelize) => {
-    const handlingQuestion = sequelize.define('handlingQuestion', {
+const PeriodicDeadline = (sequelize) => {
+    const periodicDeadline = sequelize.define('periodicDeadline', {
         id: {
             type: Sequelize.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true
         },
-        question: {
-            type: Sequelize.TEXT,
+        date: {
+            type: Sequelize.DATE,
             allowNull: false
         }
     },
@@ -17,7 +17,7 @@ const HandlingQuestion = (sequelize) => {
         underscored: true
     });
 
-    return handlingQuestion;
+    return periodicDeadline;
 };
 
-export default HandlingQuestion;
+export default PeriodicDeadline;
