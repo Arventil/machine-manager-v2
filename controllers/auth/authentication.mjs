@@ -2,6 +2,8 @@ import fs from 'fs';
 
 import jwt from 'jsonwebtoken';
 
+import { logAndSendErr } from '../../utils/errHelper.mjs';
+
 const authentication = (req, res, next) => {
     const authorizationHeader = req.get('Authorization');
 
@@ -18,7 +20,7 @@ const authentication = (req, res, next) => {
         .then(publicKey => {
             return jwt.verify(token, publicKey, {
                 expiresIn: '30min',
-                algorithm: ['RS256']
+                algorithm: 'RS256'
             });
         })
         .then(verificationResult => {
@@ -28,8 +30,12 @@ const authentication = (req, res, next) => {
                     message: 'Not authenticated!'
                 });
             }
+            console.log(verificationResult);
 
             next();
+        })
+        .catch(err => {
+            logAndSendErr(err, res);
         });
 };
 

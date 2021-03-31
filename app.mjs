@@ -3,11 +3,13 @@ import bcryptjs from 'bcryptjs';
 
 import db from './db/dbSettings.mjs';
 
+import operatorRoutes from './routes/operatorRoutes.mjs';
+
 const app = express();
 
-app.use('/', (req, res, next) => {
-    res.status(200).json({ message: 'Hello World!' });
-});
+app.use(express.json());
+app.use(express.urlencoded());
+app.use('/api', operatorRoutes);
 
 let hashedAdminPass;
 

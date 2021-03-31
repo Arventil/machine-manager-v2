@@ -4,6 +4,7 @@
   "description": "Application for managing machines",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.mjs",
     "test": "test"
   },
   "author": "Paweł Merek",

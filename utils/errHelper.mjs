@@ -1,4 +1,12 @@
-const logAndSendErr = (err, res) => {
+export const throwErr = (statusCode, message) => {
+    const err = new Error(message);
+
+    err.statusCode = status;
+
+    throw err;
+};
+
+export const logAndSendErr = (err, res) => {
     if (!err.statusCode) {
         err.statusCode = 500;
     }
@@ -14,5 +22,3 @@ const logAndSendErr = (err, res) => {
         original: err.original
     });
 };
-
-export default logAndSendErr;
