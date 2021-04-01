@@ -1,22 +1,24 @@
-import fs from 'fs';
+import { promises as fs } from 'fs';
 
 import jwt from 'jsonwebtoken';
 
 import { logAndSendErr } from '../../utils/errHelper.mjs';
 
 const authentication = (req, res, next) => {
-    const authorizationHeader = req.get('Authorization');
+    const token = req.get('Authorization').split(' ')[1];
 
-    if (!authorizationHeader) {
+    if (req.url === '/api/login') {
+        return next();
+    }
+
+    if (!token) {
         return res.status(401).json({
             success: false,
             message: 'Not authenticated!'
         });
     }
 
-    const token = authorizationHeader.split(' ')[1];
-
-    fs.readFile('../../keys/public.key')
+    fs.readFile('./keys/public.key')
         .then(publicKey => {
             return jwt.verify(token, publicKey, {
                 expiresIn: '30min',
@@ -30,9 +32,13 @@ const authentication = (req, res, next) => {
                     message: 'Not authenticated!'
                 });
             }
-            console.log(verificationResult);
 
-            next();
+            req.operator = {
+                id: verificationResult.id,
+                role: verificationResult.role
+            };
+
+            return next();
         })
         .catch(err => {
             logAndSendErr(err, res);

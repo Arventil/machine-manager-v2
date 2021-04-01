@@ -1,8 +1,7 @@
 export const throwErr = (statusCode, message) => {
     const err = new Error(message);
 
-    err.statusCode = status;
-
+    err.statusCode = statusCode;
     throw err;
 };
 
