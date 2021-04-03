@@ -1,3 +1,5 @@
+import { promises as fs } from 'fs';
+
 export const throwErr = (statusCode, message) => {
     const err = new Error(message);
 
@@ -5,19 +7,32 @@ export const throwErr = (statusCode, message) => {
     throw err;
 };
 
-export const logAndSendErr = (err, res) => {
+export const logAndSendErr = (err, req, res) => {
     if (!err.statusCode) {
         err.statusCode = 500;
     }
 
-    console.log(err);
+    const now = new Date((new Date().getTime()) + 7200000);
+    let operatorId = req.operator ? req.operator.id : 'none';
 
-    res.status(err.statusCode).json({
+    const errFullDataObject = {
         success: false,
+        date: now,
+        operatorId: operatorId,
         errStatusCode: err.statusCode,
         message: err.message,
         stack: err.stack,
         errors: err.errors,
-        original: err.original
-    });
+        original: err.original,
+        err: err
+    };
+
+    console.log(errFullDataObject);
+
+    fs.appendFile('./Logs/logs.log', JSON.stringify(errFullDataObject) + '\n')
+        .catch(err => {
+            console.log(err);
+        });
+
+    return res.status(err.statusCode).json(errFullDataObject);
 };

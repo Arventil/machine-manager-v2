@@ -41,7 +41,7 @@ const authentication = (req, res, next) => {
             return next();
         })
         .catch(err => {
-            logAndSendErr(err, res);
+            logAndSendErr(err, req, res);
         });
 };
 

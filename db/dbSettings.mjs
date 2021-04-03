@@ -10,6 +10,7 @@ import HandlingType from './models/handlingType.mjs';
 import Machinery from './models/machinery.mjs';
 import PeriodicDeadline from './models/periodicDeadline.mjs';
 import PeriodicDeadlineCategory from './models/periodicDeadlineCategory.mjs';
+import FiredUpToken from './models/firedUpToken.mjs';
 
 const sequelize = new Sequelize(
     dbName,
@@ -33,6 +34,7 @@ db.HandlingType = HandlingType(sequelize);
 db.Machinery = Machinery(sequelize);
 db.PeriodicDeadline = PeriodicDeadline(sequelize);
 db.PeriodicDeadlineCategory = PeriodicDeadlineCategory(sequelize);
+db.FiredUpToken = FiredUpToken(sequelize);
 
 db.Operator.hasMany(db.DiaryEntry);
 db.DiaryEntry.belongsTo(db.Operator);
