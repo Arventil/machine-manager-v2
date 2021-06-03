@@ -1,19 +1,7 @@
-import express from 'express';
 import bcryptjs from 'bcryptjs';
 
 import db from './db/dbSettings.mjs';
-
-import authentication from './controllers/auth/authentication.mjs';
-
-import operatorRoutes from './routes/operatorRoutes.mjs';
-
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded());
-
-app.use(authentication);
-app.use('/api', operatorRoutes);
+import server from './server.mjs';
 
 let hashedAdminPass;
 
@@ -37,7 +25,9 @@ db.sequelize.sync({})
         return operator;
     })
     .then(() => {
-        app.listen(3000);
+        server.listen(3000, () => {
+            console.log('Server listening on port 3000...');
+        });
     })
     .catch(err => {
         console.log(err);

@@ -27,7 +27,9 @@ export const logAndSendErr = (err, req, res) => {
         err: err
     };
 
-    console.log(errFullDataObject);
+    if (process.env.NODE_ENV !== 'test') {
+        console.log(errFullDataObject);
+    }
 
     fs.appendFile('./Logs/logs.log', JSON.stringify(errFullDataObject) + '\n')
         .catch(err => {

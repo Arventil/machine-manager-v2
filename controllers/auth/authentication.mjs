@@ -5,11 +5,11 @@ import jwt from 'jsonwebtoken';
 import { logAndSendErr } from '../../utils/errHelper.mjs';
 
 const authentication = (req, res, next) => {
-    const token = req.get('Authorization').split(' ')[1];
-
-    if (req.url === '/api/login') {
+    if (req.url === '/api/login' || req.url === '/test') {
         return next();
     }
+
+    const token = req.get('Authorization').split(' ')[1];
 
     if (!token) {
         return res.status(401).json({

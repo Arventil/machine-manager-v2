@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-import { dbName, dbUsername, dbPass, dbHost } from '../config.mjs';
+import { dbName, dbUsername, dbPass, dbHost } from '../config/config.mjs';
 
 import Operator from './models/operator.mjs';
 import DiaryEntry from './models/diaryEntry.mjs';
@@ -12,11 +12,18 @@ import PeriodicDeadline from './models/periodicDeadline.mjs';
 import PeriodicDeadlineCategory from './models/periodicDeadlineCategory.mjs';
 import FiredUpToken from './models/firedUpToken.mjs';
 
+let sequelizeLogging = console.log;
+
+if (process.env.NODE_ENV === 'test') {
+    sequelizeLogging = false;
+}
+
 const sequelize = new Sequelize(
     dbName,
     dbUsername,
     dbPass,
     {
+        logging: sequelizeLogging,
         dialect: 'mysql',
         host: dbHost
     }
